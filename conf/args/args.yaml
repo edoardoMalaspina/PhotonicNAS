@@ -4,6 +4,6 @@ type_config: float
 search: false
 algorithm: DartsSearcher
 output_path: '.' # Caution: this is the output path relative to the current hydra ouput directory
-save_nnp: false
-no_visualize: true
+save_nnp: true
+no_visualize: false
 print_frequency: 100
