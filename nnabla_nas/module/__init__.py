@@ -62,4 +62,5 @@ __all__ = [
     'Lambda',
     'MixedOp',
     'Add2',
+    'PhotonicSigmoid',
 ]
