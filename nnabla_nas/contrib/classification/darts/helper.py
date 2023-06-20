@@ -116,6 +116,8 @@ def save_dart_arch(model, output_path):
     writer.add_graph(model,inputs)
     writer.flush()
     writer.close()
+    logger.info(model.summary())
+
     write_to_json_file(memo, arch_file)
 
 
