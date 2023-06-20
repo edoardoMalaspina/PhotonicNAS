@@ -26,6 +26,7 @@ from .linear import Linear
 from .merging import Merging
 from .module import Module
 from .parameter import Parameter
+from .photonicSigmoid import PhotonicSigmoid
 from .pooling import AvgPool
 from .pooling import GlobalAvgPool
 from .pooling import MaxPool
