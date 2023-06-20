@@ -20,6 +20,7 @@ from .... import module as Mo
 
 CANDIDATES = OrderedDict([
     ('dil_conv_3x3', lambda c, s: DDSConv(c, c, (3, 3), (2, 2), (s, s))),
+    ('experimental_3x3', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
     ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
     #('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
     ('avg_pool_3x3', lambda c, s: Mo.AvgPool((3, 3), stride=(s, s), pad=(1, 1))),
@@ -165,6 +166,49 @@ class DDSConv(Mo.Module):
                     dilation=(2, 2), group=in_channels, with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=out_channels,
                     kernel=(1, 1), with_bias=False),
+            #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+        )
+
+    def call(self, input):
+        return self._conv(input)
+
+    def extra_repr(self):
+        return (f'in_channels={self._in_channels}, '
+                f'out_channels={self._out_channels}, '
+                f'kernel={self._kernel}, '
+                f'pad={self._pad}, '
+                f'stride={self._stride}')
+
+#Prima classe sperimentale
+class Experimental1(Mo.Module):
+    """Dilated depthwise separable convolution layer.
+
+    Args:
+        in_channels (int): The number of input channels.
+        out_channels (int): The number of output channels.
+        kernel (:obj:`tuple` of :obj:`int`): The kernel size.
+        pad (:obj:`tuple` of :obj:`int`): Border padding values for each
+            spatial axis. Padding will be added both sides of the dimension.
+            [default=``(0,) * len(kernel)``].
+        stride (:obj:`tuple` of :obj:`int`): Stride sizes for dimensions.
+            Defaults to None.
+    """
+
+    def __init__(self, in_channels, out_channels, kernel,
+                 pad=None, stride=None):
+        self._in_channels = in_channels
+        self._out_channels = out_channels
+        self._kernel = kernel
+        self._pad = pad
+        self._stride = stride
+
+        self._conv = Mo.Sequential(
+
+            Mo.Conv(in_channels=in_channels, out_channels=in_channels,
+                    kernel=kernel, pad=pad, stride=stride,
+                    dilation=(2, 2), group=in_channels, with_bias=False),
+            Mo.ReLU(),
+
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
