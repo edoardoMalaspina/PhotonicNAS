@@ -1,0 +1,13 @@
+epoch: 50
+batch_size_train: 256
+batch_size_valid: 256
+mini_batch_train: 16
+mini_batch_valid: 16
+input_shapes: [
+  [3, 32, 32]
+]
+target_shapes: [
+  [1]
+]
+warmup: 0
+loss_weights:

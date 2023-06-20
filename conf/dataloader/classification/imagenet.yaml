@@ -1,0 +1,6 @@
+imagenet:
+  datapath: /disk1/data/ILSVRC-2012/
+  train_path: train/
+  train_file: train_label
+  valid_path: val/
+  valid_file: val_label

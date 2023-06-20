@@ -1,0 +1,9 @@
+sphinx
+sphinx_rtd_theme
+sphinxcontrib-bibtex
+nnabla
+hydra-core
+scikit-learn
+more-itertools
+networkx
+tensorboard
