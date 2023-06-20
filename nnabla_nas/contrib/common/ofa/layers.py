@@ -93,7 +93,6 @@ def build_activation(act_func, inplace=False):
         return Mo.ReLU6()
     elif act_func == 'h_swish':
         return Mo.Hswish()
-
     elif act_func is None or act_func == 'none':
         return None
     else:
