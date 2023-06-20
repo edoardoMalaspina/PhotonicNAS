@@ -128,7 +128,7 @@ class FactorizedReduce(Mo.Module):
             self._conv_1(out),
             self._conv_2(out[:, :, 1:, 1:])
         )
-        out = self._bn(out)
+        #out = self._bn(out)
         return out
 
     def extra_repr(self):
