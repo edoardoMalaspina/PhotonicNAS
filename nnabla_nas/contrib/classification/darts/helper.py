@@ -23,6 +23,9 @@ from scipy.special import softmax
 from ....utils.helper import write_to_json_file
 from .modules import CANDIDATES
 
+import nnabla as nn
+import nnabla_nas.module as Mo
+from nnabla_nas.utils.tensorboard import SummaryWriter
 
 def plot(choice, prob, filename):
     from graphviz import Digraph
@@ -108,6 +111,11 @@ def save_dart_arch(model, output_path):
             memo[name + '_' + k] = v
     arch_file = os.path.join(output_path, 'arch.json')
     logger.info('Saving arch to {}'.format(arch_file))
+    inputs = nn.Variable([1,3,32,32])
+    writer = SummaryWriter('__nabla_nas__/tensorboard')
+    writer.add_graph(model,inputs)
+    writer.flush()
+    writer.close()
     write_to_json_file(memo, arch_file)
 
 
