@@ -24,7 +24,7 @@ class PhotonicSigmoid(Module):
         self._inplace = inplace
 
     def call(self, input):
-        tmp = F.exp((x - 0.145) / 0.073)
+        tmp = F.exp((input - 0.145) / 0.073)
         result = 1.005 + (0.06 - 1.005) / (1 + tmp)
         return result
 
