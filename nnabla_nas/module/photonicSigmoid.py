@@ -25,8 +25,8 @@ class PhotonicSigmoid(Module):
 
     def call(self, input):
         tmp = F.exp((input - 0.145) / 0.073)
-        result = 1.005 + (0.06 - 1.005) / (1 + tmp)
-        return result
+       # result = 1.005 + (0.06 - 1.005) / (1 + tmp)
+        return tmp
 
     def extra_repr(self):
         return f'inplace={self._inplace}'
