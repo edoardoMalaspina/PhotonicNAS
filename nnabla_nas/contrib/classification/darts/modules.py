@@ -23,7 +23,7 @@ CANDIDATES = OrderedDict([
     ('experimental1_3x3', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental2_3x3', lambda c, s: Experimental2(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental1_2x2', lambda c, s: Experimental1(c, c, (2, 2), (1, 1), (s, s))),
-    ('experimental2_3x3', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
+    ('experimental2_2x2', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
 
    # ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
     #('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
@@ -208,10 +208,11 @@ class Experimental1(Mo.Module):
 
         self._conv = Mo.Sequential(
 
+            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
-            Mo.ReLU()
+
 
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
@@ -250,10 +251,10 @@ class Experimental2(Mo.Module):
 
         self._conv = Mo.Sequential(
 
+            Mo.PhotonicSigmoid(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
-            Mo.PhotonicSigmoid()
 
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
