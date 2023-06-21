@@ -424,7 +424,7 @@ class StemConv(Mo.Module):
         self._conv = Mo.Sequential(
             Mo.Conv(in_channels, out_channels,
                     kernel=(3, 3), pad=(1, 1), with_bias=False),
-            Mo.BatchNormalization(out_channels, 4)
+           # Mo.BatchNormalization(out_channels, 4)
         )
 
     def call(self, input):
