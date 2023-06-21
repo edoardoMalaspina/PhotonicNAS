@@ -15,7 +15,7 @@
 import nnabla.functions as F
 
 from .module import Module
-
+import numpy as np
 
 class PhotonicSigmoid(Module):
     def __init__(self, inplace=False, name=''):
@@ -27,7 +27,8 @@ class PhotonicSigmoid(Module):
         result = []
         for i in input:
             result.append( 1.005 + (0.06 - 1.005) / (1. + F.exp((i - 0.145) / 0.073)))
-        return result
+
+        return np.array(result)
 
     def extra_repr(self):
         return f'inplace={self._inplace}'
