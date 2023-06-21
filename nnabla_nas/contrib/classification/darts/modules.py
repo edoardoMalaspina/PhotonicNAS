@@ -86,9 +86,10 @@ class ReLUConvBN(Mo.Module):
         self._stride = stride
 
         self._operators = Mo.Sequential(
-            Mo.ReLU(),
+
             Mo.Conv(in_channels, out_channels, kernel=kernel,
                     stride=stride, pad=pad, with_bias=False),
+            Mo.ReLU(),
            # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
@@ -209,12 +210,12 @@ class Experimental1(Mo.Module):
 
         self._conv = Mo.Sequential(
 
+            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
 
-            Mo.ReLU(),
-
+            Mo.AvgPool(kernel=kernel, stride=stride, pad=pad),
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
@@ -256,6 +257,7 @@ class Experimental2(Mo.Module):
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
+            Mo.AvgPool(kernel=kernel, stride=stride, pad=pad),
 
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
