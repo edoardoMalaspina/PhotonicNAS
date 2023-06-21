@@ -21,9 +21,13 @@ from .... import module as Mo
 CANDIDATES = OrderedDict([
     #('dil_conv_3x3', lambda c, s: DDSConv(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental1_3x3', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
-    ('experimental2_3x3', lambda c, s: Experimental2(c, c, (3, 3), (2, 2), (s, s))),
+    ('experimental1_3x3', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
+
+    #('experimental2_3x3', lambda c, s: Experimental2(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental1_2x2', lambda c, s: Experimental1(c, c, (2, 2), (1, 1), (s, s))),
-    ('experimental2_2x2', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
+    ('experimental1_2x2', lambda c, s: Experimental1(c, c, (2, 2), (1, 1), (s, s))),
+
+    #('experimental2_2x2', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
 
    # ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
     #('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
@@ -453,6 +457,7 @@ class Cell(Mo.Module):
 
         # preprocess the inputs
         self._prep = Mo.ModuleList()
+
         if reductions[0]:
             self._prep.append(
                 FactorizedReduce(channels[0], channels[2]))
