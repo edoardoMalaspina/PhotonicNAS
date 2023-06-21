@@ -27,7 +27,7 @@ CANDIDATES = OrderedDict([
     ('experimental2_2x2', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
 
    # ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
-    #('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
+    ('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
     #('avg_pool_3x3', lambda c, s: Mo.AvgPool((3, 3), stride=(s, s), pad=(1, 1))),
     #('skip_connect', lambda c, s: FactorizedReduce(c, c) if s > 1
      #else Mo.Identity()),
@@ -215,7 +215,6 @@ class Experimental1(Mo.Module):
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
 
-            Mo.AvgPool(kernel=kernel, stride=stride, pad=pad),
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
@@ -257,7 +256,6 @@ class Experimental2(Mo.Module):
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
-            Mo.AvgPool(kernel=kernel, stride=stride, pad=pad),
 
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
