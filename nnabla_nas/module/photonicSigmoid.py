@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import nnabla.functions as F
-
+import nnabla as nn
 from .module import Module
 import numpy as np
 
@@ -24,11 +24,10 @@ class PhotonicSigmoid(Module):
         self._inplace = inplace
 
     def call(self, input):
-        result = []
-        for i in input:
-            result.append( 1.005 + (0.06 - 1.005) / (1. + F.exp((i - 0.145) / 0.073)))
-
-        return (result)
+        result = ()
+        tmp = (1.005 + (0.06 - 1.005) / (1. + F.exp((input - 0.145) / 0.073)))
+        result += (tmp,)
+        return nn.Variable(result)
 
     def extra_repr(self):
         return f'inplace={self._inplace}'
