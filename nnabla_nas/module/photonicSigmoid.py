@@ -19,7 +19,7 @@ from .module import Module
 
 class PhotonicSigmoid(Module):
     def __init__(self, inplace=False, name=''):
-        self._scope_name = f'<relu at {hex(id(self))}>'
+        self._scope_name = f'<relu6 at {hex(id(self))}>'
         Module.__init__(self, name=name)
         self._inplace = inplace
 
