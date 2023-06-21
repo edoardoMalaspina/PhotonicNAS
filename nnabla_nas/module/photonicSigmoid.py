@@ -19,13 +19,12 @@ from .module import Module
 
 class PhotonicSigmoid(Module):
     def __init__(self, inplace=False, name=''):
-        self._scope_name = f'<relu6 at {hex(id(self))}>'
+        self._scope_name = f'<photonicsigmoid at {hex(id(self))}>'
         Module.__init__(self, name=name)
         self._inplace = inplace
 
     def call(self, input):
-        tmp = F.exp((input - 0.145) / 0.073)
-        result = 1.005 + (0.06 - 1.005) / (1 + tmp)
+        result = 1.005 + (0.06 - 1.005) / (1. + F.exp((input - 0.145) / 0.073))
         return result
 
     def extra_repr(self):
