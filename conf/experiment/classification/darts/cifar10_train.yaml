@@ -22,7 +22,7 @@ network:
     genotype: log/classification/darts/cifar10/search/arch.json
 
 hparams:
-  epoch: 1
+  epoch: 50
   batch_size_train: 384
   batch_size_valid: 400
   mini_batch_train: 48
