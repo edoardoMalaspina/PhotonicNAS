@@ -85,10 +85,10 @@ class ReLUConvBN(Mo.Module):
 
         self._operators = Mo.Sequential(
 
+            Mo.ReLU(),
             Mo.Conv(in_channels, out_channels, kernel=kernel,
                     stride=stride, pad=pad, with_bias=False),
-            Mo.ReLU(),
-            #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -119,14 +119,14 @@ class FactorizedReduce(Mo.Module):
 
         self._in_channels = in_channels
         self._out_channels = out_channels
+        self._relu = Mo.ReLU()
         self._conv_1 = Mo.Conv(in_channels, out_channels // 2, kernel=(1, 1),
                                stride=(2, 2), with_bias=False)
         self._conv_2 = Mo.Conv(in_channels, out_channels // 2, kernel=(1, 1),
                                stride=(2, 2), with_bias=False)
         self._conc = Mo.Merging(mode='concat', axis=1)
-        self._relu = Mo.ReLU()
 
-        #self._bn = Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+        self._bn = Mo.BatchNormalization(n_features=out_channels, n_dims=4)
 
     def call(self, input):
         out = self._relu(input)
@@ -134,7 +134,7 @@ class FactorizedReduce(Mo.Module):
             self._conv_1(out),
             self._conv_2(out[:, :, 1:, 1:])
         )
-        #out = self._bn(out)
+        out = self._bn(out)
         return out
 
     def extra_repr(self):
@@ -165,14 +165,14 @@ class DDSConv(Mo.Module):
         self._stride = stride
 
         self._conv = Mo.Sequential(
+            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=out_channels,
                     kernel=(1, 1), with_bias=False),
-            Mo.ReLU(),
 
-            #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -210,12 +210,12 @@ class Experimental1(Mo.Module):
 
         self._conv = Mo.Sequential(
 
+            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
-            Mo.ReLU(),
 
-            # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -257,7 +257,7 @@ class Experimental2(Mo.Module):
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
 
-            #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -296,21 +296,21 @@ class SepConv(Mo.Module):
         self._stride = stride
 
         self._conv = Mo.Sequential(
+            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     group=in_channels, with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=(1, 1), with_bias=False),
-           # Mo.BatchNormalization(n_features=in_channels, n_dims=4),
+            Mo.BatchNormalization(n_features=in_channels, n_dims=4),
             Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=(1, 1), group=in_channels,
                     with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=out_channels,
                     kernel=(1, 1), with_bias=False),
-            Mo.ReLU(),
 
-            # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -375,7 +375,7 @@ class StemConv(Mo.Module):
         self._conv = Mo.Sequential(
             Mo.Conv(in_channels, out_channels,
                     kernel=(3, 3), pad=(1, 1), with_bias=False),
-            #Mo.BatchNormalization(out_channels, 4)
+            Mo.BatchNormalization(out_channels, 4)
         )
 
     def call(self, input):
