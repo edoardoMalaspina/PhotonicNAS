@@ -19,14 +19,12 @@ import nnabla.functions as F
 from .... import module as Mo
 
 CANDIDATES = OrderedDict([
-    ('dil_conv_3x3', lambda c, s: DDSConv(c, c, (3, 3), (2, 2), (s, s))),
+ #   ('dil_conv_3x3', lambda c, s: DDSConv(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental1_3x3', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
-    #('experimental2_3x3', lambda c, s: Experimental2(c, c, (3, 3), (2, 2), (s, s))),
     ('experimental1_2x2', lambda c, s: Experimental1(c, c, (2, 2), (1, 1), (s, s))),
-
-    #('experimental2_2x2', lambda c, s: Experimental2(c, c, (2, 2), (1, 1), (s, s))),
-
-    ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
+    ('experimental1_3x3_2', lambda c, s: Experimental1(c, c, (3, 3), (2, 2), (s, s))),
+    ('experimental1_2x2_2', lambda c, s: Experimental1(c, c, (2, 2), (1, 1), (s, s))),
+#    ('sep_conv_3x3', lambda c, s: SepConv(c, c, (3, 3), (1, 1), (s, s))),
     #('max_pool_3x3', lambda c, s: Mo.MaxPool((3, 3), stride=(s, s), pad=(1, 1))),
     ('avg_pool_3x3', lambda c, s: Mo.AvgPool((3, 3), stride=(s, s), pad=(1, 1))),
     ('skip_connect', lambda c, s: FactorizedReduce(c, c) if s > 1
@@ -121,12 +119,13 @@ class FactorizedReduce(Mo.Module):
 
         self._in_channels = in_channels
         self._out_channels = out_channels
-        self._relu = Mo.ReLU()
         self._conv_1 = Mo.Conv(in_channels, out_channels // 2, kernel=(1, 1),
                                stride=(2, 2), with_bias=False)
         self._conv_2 = Mo.Conv(in_channels, out_channels // 2, kernel=(1, 1),
                                stride=(2, 2), with_bias=False)
         self._conc = Mo.Merging(mode='concat', axis=1)
+        self._relu = Mo.ReLU()
+
         #self._bn = Mo.BatchNormalization(n_features=out_channels, n_dims=4)
 
     def call(self, input):
@@ -166,12 +165,13 @@ class DDSConv(Mo.Module):
         self._stride = stride
 
         self._conv = Mo.Sequential(
-            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=out_channels,
                     kernel=(1, 1), with_bias=False),
+            Mo.ReLU(),
+
             #Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
@@ -210,12 +210,12 @@ class Experimental1(Mo.Module):
 
         self._conv = Mo.Sequential(
 
-            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     dilation=(2, 2), group=in_channels, with_bias=False),
+            Mo.ReLU(),
 
-           # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
@@ -296,7 +296,6 @@ class SepConv(Mo.Module):
         self._stride = stride
 
         self._conv = Mo.Sequential(
-            Mo.ReLU(),
             Mo.Conv(in_channels=in_channels, out_channels=in_channels,
                     kernel=kernel, pad=pad, stride=stride,
                     group=in_channels, with_bias=False),
@@ -309,7 +308,9 @@ class SepConv(Mo.Module):
                     with_bias=False),
             Mo.Conv(in_channels=in_channels, out_channels=out_channels,
                     kernel=(1, 1), with_bias=False),
-           # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
+            Mo.ReLU(),
+
+            # Mo.BatchNormalization(n_features=out_channels, n_dims=4)
         )
 
     def call(self, input):
