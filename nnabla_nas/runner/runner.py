@@ -156,12 +156,7 @@ class Runner(ABC):
         outputs = model(*inputs)
         if not isinstance(outputs, tuple):
             outputs = (outputs,)
-        ####################
-        writer = SummaryWriter('__nabla_nas__/tensorboard/1')
-        writer.add_graph(model, inputs)
-        writer.flush()
-        writer.close()
-        ###################
+
         outputs = [output.apply(persistent=True) for output in outputs]
         placeholder['outputs'] = outputs
 
