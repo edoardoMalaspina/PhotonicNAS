@@ -51,7 +51,7 @@ class SearchNet(Model):
     """
 
     def __init__(self, in_channels, init_channels, num_cells, num_classes,
-                 num_choices=4, multiplier=4, mode='full', shared=False,
+                 num_choices=8, multiplier=4, mode='full', shared=False,
                  stem_multiplier=3):
         self._in_channels = in_channels
         self._init_channels = init_channels
