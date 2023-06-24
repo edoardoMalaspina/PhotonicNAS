@@ -6,4 +6,4 @@ algorithm: DartsSearcher
 output_path: '.' # Caution: this is the output path relative to the current hydra ouput directory
 save_nnp: true
 no_visualize: false
-print_frequency: 100
+print_frequency: 10

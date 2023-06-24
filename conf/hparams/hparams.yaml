@@ -1,4 +1,4 @@
-epoch: 1
+epoch: 10
 batch_size_train: 256
 batch_size_valid: 256
 mini_batch_train: 16
