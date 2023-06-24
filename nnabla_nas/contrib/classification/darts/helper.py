@@ -23,9 +23,6 @@ from scipy.special import softmax
 from ....utils.helper import write_to_json_file
 from .modules import CANDIDATES
 
-import nnabla as nn
-import nnabla_nas.module as Mo
-from nnabla_nas.utils.tensorboard import SummaryWriter
 
 def plot(choice, prob, filename):
     from graphviz import Digraph
