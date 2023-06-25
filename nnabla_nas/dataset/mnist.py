@@ -30,7 +30,7 @@ def download_data(train=True):
     logger.info('Getting labeled data from {}.'.format(data_uri))
 
     r = download(data_uri)  # file object returned
-    with tarfile.open(fileobj=r, mode="r:gz") as fpin:
+    with tarfile.open(fileobj=r, mode="r:npz") as fpin:
         if train:
             images = []
             labels = []
