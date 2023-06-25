@@ -23,18 +23,16 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 from .dataloader import BaseDataLoader
-
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
 
 def download_data(train=True):
 
-    data = np.load("../../../train_minst", encoding="bytes", allow_pickle=True)
-    images = np.array(data).reshape(60000, 1, 28, 28)
 
+    # Carica il dataset MNIST
+    (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
-    data_label = np.load("../../../labels_minst", encoding="bytes", allow_pickle=True)
-    labels = np.array(data_label).reshape(-1, 1)
-
-    return images, labels
+    return train_images, train_labels
 
 
 class MNISTDataSource(DataSource):
