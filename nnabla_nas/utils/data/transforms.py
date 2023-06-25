@@ -283,7 +283,7 @@ def CIFAR10_transform(key='train'):
     return Compose([
         Normalize(mean=mean, std=std, scale=scale)
     ])
-'''def MNIST_transform(key='train'):
+def MNIST_transform(key='train'):
     r"""Return a transform applied to data augmentation for MNIST."""
     assert key in ('train', 'valid')
 
@@ -299,9 +299,7 @@ def CIFAR10_transform(key='train'):
             RandomHorizontalFlip()
         ])
 
-    return Compose([
-        Normalize(mean=mean, std=std, scale=scale)
-    ])'''
+    return
 
 def ImageNet_transform(key='train'):
     r"""Return a transform applied to data augmentation for ImageNet."""
