@@ -295,7 +295,7 @@ def MNIST_transform(key='train'):
     if key == 'train':
         return Compose([
             Normalize(mean=mean, std=std, scale=scale),
-            RandomCrop((28, 28), padding=pad_width),
+            RandomCrop((1,28, 28), pad_width=pad_width),
             RandomHorizontalFlip()
         ])
 
