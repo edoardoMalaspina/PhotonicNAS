@@ -22,4 +22,4 @@ except ImportError:
     logger.warning(
         '  If you want to use nnabla_nas.dataset.imagenet, please install nvidia-dali-cuda???.')
 
-__all__ = ['cifar10', 'imagenet', 'csv']
+__all__ = ['cifar10', 'imagenet', 'csv','mnist']

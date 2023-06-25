@@ -1,0 +1,2 @@
+cifar10:
+  transform: MNIST_transform
