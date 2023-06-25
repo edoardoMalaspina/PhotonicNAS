@@ -26,7 +26,6 @@ from .dataloader import BaseDataLoader
 
 
 def download_data(train=True):
-    logger.info('Getting labeled data from {}.'.format(data_uri))
 
     data = np.load("../../../train_minst", encoding="bytes", allow_pickle=True)
     images = np.array(data).reshape(60000, 1, 28, 28)
