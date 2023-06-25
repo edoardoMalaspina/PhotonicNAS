@@ -79,7 +79,7 @@ class MNISTDataSource(DataSource):
             self._indexes = self.rng.permutation(self._size)
         else:
             self._indexes = np.arange(self._size)
-        super(CifarDataSource, self).reset()
+        super(MNISTDataSource, self).reset()
 
     @property
     def images(self):
