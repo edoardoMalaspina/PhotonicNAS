@@ -14,6 +14,7 @@
 
 from . import cifar10
 from . import csv
+from . import mnist
 try:
     from . import imagenet
 except ImportError:
@@ -22,4 +23,4 @@ except ImportError:
     logger.warning(
         '  If you want to use nnabla_nas.dataset.imagenet, please install nvidia-dali-cuda???.')
 
-__all__ = ['cifar10', 'imagenet', 'csv','MNIST']
+__all__ = ['cifar10', 'imagenet', 'csv','mnist']
