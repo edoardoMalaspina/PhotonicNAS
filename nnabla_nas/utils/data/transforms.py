@@ -287,8 +287,8 @@ def MNIST_transform(key='train'):
     r"""Return a transform applied to data augmentation for MNIST."""
     assert key in ('train', 'valid')
 
-    mean = (0.1307,)
-    std = (0.3081,)
+    mean = (0.1307, 0.1308, 0.1306)
+    std = (0.3081, 0.3082, 0.3083)
     scale = 1./255.0
     pad_width = (2, 2)
 
