@@ -24,6 +24,7 @@ network:
     shared: true
     mode: full
     in_channels : 1
+    init_channels : 1
 
 optimizer:
   valid:

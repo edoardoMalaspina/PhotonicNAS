@@ -4,7 +4,7 @@ batch_size_valid: 256
 mini_batch_train: 16
 mini_batch_valid: 16
 input_shapes: [
-  [1, 28, 28]
+  [3, 32, 32]
 ]
 target_shapes: [
   [1]
