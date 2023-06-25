@@ -42,8 +42,8 @@ def download_data(train=True):
                 images.append(data[b"data"])
                 labels.append(data[b"labels"])
             size = 60000
-            images = np.concatenate(images).reshape(size, 1, 28, 28)
-            labels = np.concatenate(labels).reshape(-1, 1)
+            #images = np.concatenate(images).reshape(size, 1, 28, 28)
+            #labels = np.concatenate(labels).reshape(-1, 1)
         else:
             for member in fpin.getmembers():
                 if "test_batch" not in member.name:
