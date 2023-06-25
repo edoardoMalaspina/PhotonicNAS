@@ -283,7 +283,25 @@ def CIFAR10_transform(key='train'):
     return Compose([
         Normalize(mean=mean, std=std, scale=scale)
     ])
+def MNIST_transform(key='train'):
+    r"""Return a transform applied to data augmentation for MNIST."""
+    assert key in ('train', 'valid')
 
+    mean = (0.1307,)
+    std = (0.3081,)
+    scale = 1./255.0
+    pad_width = (2, 2)
+
+    if key == 'train':
+        return Compose([
+            Normalize(mean=mean, std=std, scale=scale),
+            RandomCrop((28, 28), padding=pad_width),
+            RandomHorizontalFlip()
+        ])
+
+    return Compose([
+        Normalize(mean=mean, std=std, scale=scale)
+    ])
 
 def ImageNet_transform(key='train'):
     r"""Return a transform applied to data augmentation for ImageNet."""
