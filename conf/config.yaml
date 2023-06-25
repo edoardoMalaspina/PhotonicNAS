@@ -3,12 +3,12 @@
 defaults:
   - _self_
   - args: args.yaml
-  - dataloader: classification/mnist.yaml
+  - dataloader: classification/cifar10.yaml
   - network: classification/darts.yaml
   - optimizer: valid.yaml
   - hparams: hparams.yaml
 
-  - experiment: classification/darts/mnist_search.yaml
+  - experiment: classification/darts/cifar10_search.yaml
 
   - override hydra/job_logging: colorlog
   - override hydra/hydra_logging: colorlog
