@@ -40,7 +40,7 @@ class Normalize(object):
     def __call__(self, input):
         out = F.mul_scalar(input, self._scale)
         #out = F.sub2(out, self._mean)
-        out = F.div2(out, self._std)
+        # out = F.div2(out, self._std)
         return out
 
     def __str__(self):
