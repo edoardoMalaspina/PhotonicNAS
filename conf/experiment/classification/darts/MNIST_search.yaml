@@ -7,7 +7,7 @@ defaults:
   - override /optimizer: valid.yaml
   - override /network: classification/darts.yaml
 
-name: classification/darts/cifar10/search
+name: classification/darts/MNIST/search
 
 dataloader:
   MNIST:
