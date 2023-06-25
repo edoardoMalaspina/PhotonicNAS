@@ -16,7 +16,7 @@ dataloader:
 hparams:
   warmup: 0
   input_shapes: [
-    [ 28, 28 ]
+    [ 1,28, 28 ]
   ]
 
 network:
