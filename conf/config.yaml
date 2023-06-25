@@ -3,7 +3,7 @@
 defaults:
   - _self_
   - args: args.yaml
-  - dataloader: classification/cifar10.yaml
+  - dataloader: classification/mnist.yaml
   - network: classification/darts.yaml
   - optimizer: valid.yaml
   - hparams: hparams.yaml
