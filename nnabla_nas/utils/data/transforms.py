@@ -32,14 +32,14 @@ class Normalize(object):
 
     def __init__(self, mean, std, scale):
         self._mean = Mo.Parameter(
-            (1, 1 ,1 , 1), need_grad=False, initializer=np.reshape(mean, (1, 1, 1, 1)))
+            (1, 1, 1), need_grad=False, initializer=np.reshape(mean, (1, 1, 1)))
         self._std = Mo.Parameter(
-            (1, 1, 1, 1), need_grad=False, initializer=np.reshape(std, (1, 1, 1, 1)))
+            (1, 1, 1), need_grad=False, initializer=np.reshape(std, (1, 1, 1)))
         self._scale = scale
 
     def __call__(self, input):
         out = F.mul_scalar(input, self._scale)
-        out = F.sub2(out, self._mean)
+        #out = F.sub2(out, self._mean)
         out = F.div2(out, self._std)
         return out
 
