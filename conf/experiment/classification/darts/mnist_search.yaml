@@ -2,7 +2,7 @@
 
 defaults:
   - override /args: args.yaml
-  - override /dataloader: classification/MNIST.yaml
+  - override /dataloader: classification/mnist.yaml
   - override /hparams: hparams.yaml
   - override /optimizer: valid.yaml
   - override /network: classification/darts.yaml
@@ -10,7 +10,7 @@ defaults:
 name: classification/darts/mnist/search
 
 dataloader:
-  MNIST:
+  mnist:
     train_portion: 0.5
 
 hparams:

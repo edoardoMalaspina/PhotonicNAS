@@ -1,2 +1,2 @@
-MNIST:
+mnist:
   transform: MNIST_transform
