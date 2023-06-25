@@ -26,33 +26,16 @@ from .dataloader import BaseDataLoader
 
 
 def download_data(train=True):
-    data_uri = "http://www.di.ens.fr/~lelarge/MNIST.tar.gz"
     logger.info('Getting labeled data from {}.'.format(data_uri))
 
-    r = download(data_uri)  # file object returned
-    with tarfile.open(fileobj=r, mode="r:gz") as fpin:
-        if train:
-            images = []
-            labels = []
-            for member in fpin.getmembers():
-                if "data_batch" not in member.name:
-                    continue
-                fp = fpin.extractfile(member)
-                data = np.load(fp, encoding="bytes", allow_pickle=True)
-                images.append(data[b"data"])
-                labels.append(data[b"labels"])
-            size = 60000
-            #images = np.concatenate(images).reshape(size, 1, 28, 28)
-            #labels = np.concatenate(labels).reshape(-1, 1)
-        else:
-            for member in fpin.getmembers():
-                if "test_batch" not in member.name:
-                    continue
-                fp = fpin.extractfile(member)
-                data = np.load(fp, encoding="bytes", allow_pickle=True)
-                images = data[b"data"].reshape(10000, 1, 28, 28)
-                labels = np.array(data[b"labels"]).reshape(-1, 1)
-    return (images, labels)
+    data = np.load("../../train_minst", encoding="bytes", allow_pickle=True)
+    images = np.array(data).reshape(60000, 1, 28, 28)
+
+
+    data_label = np.load("../../labels_minst", encoding="bytes", allow_pickle=True)
+    labels = np.array(data_label).reshape(-1, 1)
+
+    return images, labels
 
 
 class MNISTDataSource(DataSource):
