@@ -15,6 +15,9 @@ dataloader:
 
 hparams:
   warmup: 0
+  input_shapes: [
+    [ 1, 28, 28 ]
+  ]
 
 network:
   darts:
