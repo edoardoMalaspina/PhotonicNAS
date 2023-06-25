@@ -32,9 +32,9 @@ class Normalize(object):
 
     def __init__(self, mean, std, scale):
         self._mean = Mo.Parameter(
-            (1, 1, 1, 1), need_grad=False, initializer=np.reshape(mean, (1, 1, 1, 1)))
+            (1, 1, 1), need_grad=False, initializer=np.reshape(mean, (1, 1, 1)))
         self._std = Mo.Parameter(
-            (1, 1, 1, 1), need_grad=False, initializer=np.reshape(std, (1, 1, 1, 1)))
+            (1, 1, 1), need_grad=False, initializer=np.reshape(std, (1, 1, 1)))
         self._scale = scale
 
     def __call__(self, input):
@@ -287,8 +287,8 @@ def MNIST_transform(key='train'):
     r"""Return a transform applied to data augmentation for MNIST."""
     assert key in ('train', 'valid')
 
-    mean = (0.1307)
-    std = (0.3081)
+    mean = 0.1307
+    std = 0.3081
     scale = 1./255.0
     pad_width = (2, 2)
 
