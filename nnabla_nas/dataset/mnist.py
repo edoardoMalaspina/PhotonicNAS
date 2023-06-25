@@ -26,11 +26,11 @@ from .dataloader import BaseDataLoader
 
 
 def download_data(train=True):
-    data_uri = "https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz"
+    data_uri = "http://www.di.ens.fr/~lelarge/MNIST.tar.gz"
     logger.info('Getting labeled data from {}.'.format(data_uri))
 
     r = download(data_uri)  # file object returned
-    with tarfile.open(fileobj=r, mode="r:npz") as fpin:
+    with tarfile.open(fileobj=r, mode="r:gz") as fpin:
         if train:
             images = []
             labels = []
