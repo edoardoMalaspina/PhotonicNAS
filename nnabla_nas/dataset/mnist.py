@@ -41,7 +41,7 @@ def download_data(train=True):
                 data = np.load(fp, encoding="bytes", allow_pickle=True)
                 images.append(data[b"data"])
                 labels.append(data[b"labels"])
-            size = 50000
+            size = 60000
             images = np.concatenate(images).reshape(size, 1, 28, 28)
             labels = np.concatenate(labels).reshape(-1, 1)
         else:
